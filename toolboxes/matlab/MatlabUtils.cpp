@@ -657,7 +657,7 @@ mxArray* BufferToMatlabStruct(IsmrmrdDataBuffered* buffer, bool omitData){
         size_t h_idx = 0;
         for (size_t ch = 0; ch < nCH; ++ch){
             for (size_t l = 0; l < h_nelem; ++l) {
-                if((bool) buffer->headers_[l].read_dir[2])
+                if((bool)buffer->headers_[l].read_dir[0] || (bool)buffer->headers_[l].read_dir[1] || (bool)buffer->headers_[l].read_dir[2])
                 {
                     for (size_t r = 0; r < nRO; ++r){
                             h_idx = ch*nRO*nPE*n3D + l*nRO + r;
