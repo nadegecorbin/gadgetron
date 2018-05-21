@@ -575,7 +575,7 @@ mxArray* BufferToMatlabStruct(IsmrmrdDataBuffered* buffer, bool omitData){
         // count the number of non-nul RO lines in this buffer (there's probably a more elegant built-in method)
         size_t RO_counter = 0;
         for (size_t l = 0; l < h_nelem; ++l)
-            if((bool) buffer->headers_[l].read_dir[2])
+            if((bool)buffer->headers_[l].read_dir[0] || (bool)buffer->headers_[l].read_dir[1] || (bool)buffer->headers_[l].read_dir[2])
                 RO_counter += nCH;
         /*
         
@@ -597,7 +597,7 @@ mxArray* BufferToMatlabStruct(IsmrmrdDataBuffered* buffer, bool omitData){
 
         }
         */
-        /*
+        
         std::cout << "N elem: " << buffer->data_.get_number_of_elements() << std::endl;
         std::cout << "N phase: " << buffer->data_.get_number_of_elements()/buffer->data_.get_size(0) << std::endl;
         std::cout << "RO_counter: " << RO_counter << std::endl;
@@ -606,7 +606,7 @@ mxArray* BufferToMatlabStruct(IsmrmrdDataBuffered* buffer, bool omitData){
                                       buffer->data_.get_size(2) << "," <<
                                       buffer->data_.get_size(3) << "," <<
                                       buffer->data_.get_size(4)  << std::endl;
-        */
+        
         
         
         // create the packet. A copy of the data is being done here,
